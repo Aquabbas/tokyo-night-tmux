@@ -10,29 +10,24 @@
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS_PATH="$CURRENT_DIR/src"
 
-# No theme sourcing, keeping your adjustments
+source $SCRIPTS_PATH/themes.sh
+
 tmux set -g status-left-length 80
 tmux set -g status-right-length 150
 
-# RESET for colors
-RESET="#[fg=#a9b1d6,bg=#1A1B26,nobold,noitalics,nounderscore,nodim]"
-
+RESET="#[fg=${THEME[foreground]},bg=${THEME[background]},nobold,noitalics,nounderscore,nodim]"
 # Highlight colors
-tmux set -g mode-style "fg=#41a6b5,bg=#2A2F41"
+tmux set -g mode-style "fg=${THEME[bgreen]},bg=${THEME[bblack]}"
 
-# Message styling
-tmux set -g message-style "bg=#7aa2f7,fg=#1A1B26"
-tmux set -g message-command-style "fg=#c0caf5,bg=#414868"
+tmux set -g message-style "bg=${THEME[blue]},fg=${THEME[background]}"
+tmux set -g message-command-style "fg=${THEME[white]},bg=${THEME[black]}"
 
-# Pane borders
-tmux set -g pane-border-style "fg=#2A2F41"
-tmux set -g pane-active-border-style "fg=#7aa2f7"
+tmux set -g pane-border-style "fg=${THEME[bblack]}"
+tmux set -g pane-active-border-style "fg=${THEME[blue]}"
 tmux set -g pane-border-status off
 
-# Status style
-tmux set -g status-style bg="default"
+tmux set -g status-style bg="${THEME[background]}"
 
-# Variables for custom widgets and settings
 TMUX_VARS="$(tmux show -g)"
 
 default_window_id_style="digital"
