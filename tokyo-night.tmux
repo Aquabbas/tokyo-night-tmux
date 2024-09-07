@@ -53,16 +53,15 @@ current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 battery_status="#($SCRIPTS_PATH/battery-widget.sh)"
 
 #+--- Bars LEFT ---+
-# Session name with calm Catppuccin colors (foreground: #89b4fa, background: #45475a)
-tmux set -g status-left "#[fg=#89b4fa,bg=#45475a,bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[fg=#89b4fa,bg=#45475a,bold,nodim]#S $RESET"
+# Session name
+tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
 
 #+--- Windows ---+
-# Focused windows
-tmux set -g window-status-current-format "#[fg=#44dfaf,bg=#1A1B26]   #[fg=#a9b1d6]$window_number #[bold,nodim]#W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
-
-# Unfocused windows (removed blinking widget)
-tmux set -g window-status-format "#[fg=#c0caf5,bg=default,none,dim]   $window_number #W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane}"
+# Focus
+tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀 , }#[fg=${THEME[foreground]},bold,nodim]$window_number#W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane}#{?window_last_flag, , }"
+# Unfocused
+tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},󰣀 ,}${RESET}$window_number#W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane}#[fg=${THEME[yellow]}]#{?window_last_flag,󰁯  , }"
 
 #+--- Bars RIGHT ---+
-tmux set -g status-right "$current_path$cmus_status$netspeed$git_status$wb_git_status$battery_status$date_and_time"
+tmux set -g status-right "$battery_status$current_path$cmus_status$netspeed$git_status$wb_git_status$date_and_time"
 tmux set -g window-status-separator ""
