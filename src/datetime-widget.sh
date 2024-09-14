@@ -56,4 +56,5 @@ if [[ $date_string && $time_string ]]; then
 fi
 
 # echo "$RESET#[fg=${THEME["yellow"]},bg=${THEME[background]}]$date_string $separator [$time_string] 󱅝󱐟󰒲"
-echo "$RESET#[fg=yellow,bg=${THEME[background]}]$date_string $separator [$time_string] 󱅝󱐟󰒲"
+# echo "$RESET#[fg=yellow,bg=${THEME[background]}]$date_string $separator [$time_string] 󱅝󱐟󰒲"   
+echo "$RESET#[fg=yellow,bg=${THEME[background]}]$date_string $separator [$time_string]"
